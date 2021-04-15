@@ -6,10 +6,6 @@
 #We'll use "terraform apply" to create and make changes
 provider "aws" {
   #set as AWS Global user, using aws cli
-  #region     = "us-west-1"
-  #access_key = "AKIAUTZJZKJPDDQ6PU3S"
-  #secret_key = "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"
-  #shared_credentials_file = "/Users/xarmando/.aws/credentials"
 }
 
 #declare variable, there is three ways to do it.
