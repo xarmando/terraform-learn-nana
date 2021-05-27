@@ -161,16 +161,18 @@ resource "aws_instance" "myapp-instance" {
   instance_type = var.instance_type
 
   #if we do not explicite define these fields, TF will take default VPC  in aws
-  subnet_id              = aws_subnet.myapp-subnet-1.id
-  vpc_security_group_ids = [aws_default_security_group.myapp-default-sg.id]
-  availability_zone      = var.avail_zone
-
+  subnet_id                   = aws_subnet.myapp-subnet-1.id
+  vpc_security_group_ids      = [aws_default_security_group.myapp-default-sg.id]
+  availability_zone           = var.avail_zone
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ssh-key.key_name
 
   tags = {
     Name = "${var.env_prefix}-ec2-server"
   }
+
+  #entrypoint script / remenber that this will execute once at the begining of ec2 instance
+  user_data = file("docker-script.sh")
 }
 
 #conect out ec2 instance throught out SSH key
